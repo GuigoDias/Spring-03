@@ -36,16 +36,6 @@
             traço();
         }
 
-        anoAtual = prompt("Digite o ano atual:");
-        anoFulano = 2006;
-        anoBeltrano = 2000;
-        anoSicrano = 1950;
-        idadeFulano = anoAtual - anoFulano;
-        idadeBeltrano = anoAtual - anoBeltrano;
-        idadeSicrano = anoAtual - anoSicrano;
-        somaIdades = idadeFulano + idadeBeltrano + idadeSicrano;
-        mediaIdades = somaIdades / 3;
-
         function CalcularEtaria(idade) {
             if (idade <= 17) {
                 return ("ADOLESCENTE");
@@ -63,7 +53,20 @@
             }
         }
 
-        var QuantClientes = prompt("Informe o numero de clientes:");
+        let anoAtual = prompt("Digite o ano atual:");
+
+        function testeDeIntegridade() {
+            let testeIntegridade = 0;
+            while (testeIntegridade <= 0) {
+                if (anoAtual > 0) {
+                    testeIntegridade++;
+                } else {
+                    alert("ERRO, valor informado não é válido!");
+                    anoAtual = prompt("Favor informar o ano atual corretamente!");
+                }
+            }
+        }
+
         var CodAtual = 1;
         function testeForClientes() {
             var idadeCliente = 0;
@@ -77,50 +80,29 @@
                 var MesCliente = prompt("Informe o mês de nascimento do cliente.");
                 mostra("Mês de nascimento: " + MesCliente);
                 PulaLinha2();
-                var AnoCliente = prompt("Informe o ano de nascimento do cliente.");
+                var AnoCliente = parseInt(prompt("Informe o ano de nascimento do cliente."));
+
+                let testeIntegridadeAnoCliente = 0;
+                while (testeIntegridadeAnoCliente <= 0) {
+                    if (AnoCliente > 0) {
+                        testeIntegridadeAnoCliente++;
+                    } else {
+                        alert("ERRO, valor informado não é válido!");
+                        AnoCliente = prompt("Favor informar um ano de nascimento válido!");
+                    }
+                }
+
                 mostra("Ano de nascimento: " + AnoCliente);
                 PulaLinha2();
                 traço();
                 idadeCliente += anoAtual - AnoCliente;
             }
-        
+
             mostra("*** Estatística ***");
             PulaLinha2();
             mostra("Soma das idades: " + idadeCliente);
             PulaLinha2();
-            mostra("Média das idades: " + Math.round(idadeCliente/QuantClientes));
-        }
-
-        function Conteudo() {
-            mostra("Nome: Fulano");
-            PulaLinha2();
-            mostra("Mês de nascimento: Fevereiro");
-            PulaLinha2();
-            mostra("Ano de nascimento: " + anoFulano);
-            PulaLinha2();
-            var CaractEtariaFulano = CalcularEtaria(idadeFulano);
-            mostra("Característica Etária: " + CaractEtariaFulano);
-            traço();
-            mostraH3("- Código: 2");
-            mostra("Nome: Beltrano");
-            PulaLinha2();
-            mostra("Mês de nascimento: Maio");
-            PulaLinha2();
-            mostra("Ano de nascimento: " + anoBeltrano);
-            PulaLinha2();
-            var CaractEtariaBeltrano = CalcularEtaria(idadeBeltrano);
-            mostra("Característica Etária: " + CaractEtariaBeltrano);
-            traço();
-            mostraH3("- Código: 3");
-            mostra("Nome: Sicrano");
-            PulaLinha2();
-            mostra("Mês de nascimento: Novembro");
-            PulaLinha2();
-            mostra("Ano de nascimento: " + anoSicrano);
-            PulaLinha2();
-            var CaractEtariaSicrano = CalcularEtaria(idadeSicrano);
-            mostra("Característica Etária: " + CaractEtariaSicrano);
-            traço();
+            mostra("Média arredondada das idades: " + Math.round(idadeCliente / QuantClientes));
         }
 
         function Rodape() {
@@ -128,6 +110,9 @@
             mostra(".:: Alura LEVEL UP ::.");
         }
 
+
+        testeDeIntegridade();
+        var QuantClientes = prompt("Informe o numero de clientes:");
         Cabecalho();
         testeForClientes();
         Rodape();
